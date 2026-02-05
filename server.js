@@ -90,7 +90,47 @@ app.post('/api/upload', (req, res) => {
     }
 });
 
-// Delete Image Endpoint (Local File System)
+// List All Uploads Endpoint (Admin Only - simplified check)
+app.get('/api/admin/uploads', (req, res) => {
+    // In a real app, verify admin session token here.
+    // For now, we trust the frontend UI hiding mechanism (Admin Dashboard).
+
+    try {
+        if (!fs.existsSync(UPLOAD_DIR)) {
+            return res.json({ success: true, files: [] });
+        }
+
+        const files = fs.readdirSync(UPLOAD_DIR);
+        // Filter for images
+        const imageFiles = files.filter(file => {
+            const ext = path.extname(file).toLowerCase();
+            return ['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext);
+        });
+
+        // Search for user ID in filename (assuming FORMAT: USERID_TIMESTAMP.ext)
+        // We will map to user names for better UI
+        const users = readJSON(USERS_FILE);
+        const userMap = {};
+        users.forEach(u => userMap[u.id] = u.name);
+
+        const fileData = imageFiles.map(file => {
+            const userId = file.split('_')[0]; // Extract ID
+            return {
+                url: `/uploads/${file}`,
+                filename: file,
+                userId: userId,
+                userName: userMap[userId] || 'Unknown User'
+            };
+        });
+
+        res.json({ success: true, files: fileData });
+
+    } catch (e) {
+        console.error("List uploads failed", e);
+        res.status(500).json({ success: false, message: 'Server error listing files' });
+    }
+});
+// --- End Admin API ---
 app.delete('/api/upload', (req, res) => {
     const { userId, url } = req.body;
 
@@ -199,6 +239,52 @@ app.post('/api/users', (req, res) => {
         res.json({ success: true, user: newUser });
     } else {
         res.status(500).json({ success: false, message: 'Failed to save user' });
+    }
+});
+
+// Bulk Add Users
+app.post('/api/users/bulk', (req, res) => {
+    const newUsers = req.body; // Expecting Array of {id, name, role, password}
+    if (!Array.isArray(newUsers) || newUsers.length === 0) {
+        return res.status(400).json({ success: false, message: 'Invalid data format' });
+    }
+
+    let users = readJSON(USERS_FILE);
+    let addedCount = 0;
+    let errors = [];
+
+    newUsers.forEach((u, index) => {
+        if (!u.id || !u.name) {
+            errors.push(`Row ${index + 1}: Missing ID or Name`);
+            return;
+        }
+        if (users.some(existing => existing.id === u.id)) {
+            // Option: Skip or Update? Let's Skip duplicates to be safe
+            errors.push(`Row ${index + 1}: ID ${u.id} already exists`);
+            return;
+        }
+
+        // Default Role
+        const role = ['admin', 'manager', 'viewer'].includes(u.role) ? u.role : 'viewer';
+        const password = u.password ? String(u.password) : ""; // Default empty
+
+        users.push({
+            id: String(u.id),
+            name: String(u.name),
+            role: role,
+            password: password
+        });
+        addedCount++;
+    });
+
+    if (addedCount > 0) {
+        if (writeJSON(USERS_FILE, users)) {
+            res.json({ success: true, added: addedCount, errors: errors });
+        } else {
+            res.status(500).json({ success: false, message: 'Failed to write to database' });
+        }
+    } else {
+        res.json({ success: false, message: 'No users added', errors: errors });
     }
 });
 
