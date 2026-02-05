@@ -256,8 +256,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function applyRBAC(role) {
+        // Admin-only features
         if (role === 'admin') {
             btnAdminPanel.classList.remove('hidden');
+            btnDownloadReport.classList.remove('hidden');
+            btnNewGame.classList.remove('hidden');
+            btnReset.classList.remove('hidden');
+
             // Inject Gallery Button if not exists
             if (!document.getElementById('btn-view-gallery')) {
                 const galleryBtn = document.createElement('button');
@@ -266,31 +271,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 galleryBtn.className = 'btn btn-secondary';
                 galleryBtn.style.marginLeft = '10px';
                 galleryBtn.onclick = loadGallery;
-                // Append to controls
                 controlsDiv.appendChild(galleryBtn);
             }
         } else {
-            // Remove if exists
-            const btn = document.getElementById('btn-view-gallery');
-            if (btn) btn.remove();
-        }
-        btnDownloadReport.classList.add('hidden');
-
-        if (role === 'admin') {
-            btnNewGame.classList.remove('hidden');
-            btnReset.classList.remove('hidden');
-        } else {
+            // Non-admin users
+            btnAdminPanel.classList.add('hidden');
+            btnDownloadReport.classList.add('hidden');
             btnNewGame.classList.add('hidden');
             btnReset.classList.add('hidden');
-        }
 
-        if (role === 'viewer') {
-            controlsDiv.classList.add('hidden');
-        }
-
-        if (currentUser.id === '000000' || currentUser.id === '600996') {
-            btnAdminPanel.classList.remove('hidden');
-            btnDownloadReport.classList.remove('hidden');
+            const btn = document.getElementById('btn-view-gallery');
+            if (btn) btn.remove();
         }
     }
 
