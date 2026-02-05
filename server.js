@@ -265,7 +265,7 @@ app.post('/api/users/bulk', (req, res) => {
         }
 
         // Default Role
-        const role = ['admin', 'manager', 'viewer'].includes(u.role) ? u.role : 'viewer';
+        const role = ['admin', 'player'].includes(u.role) ? u.role : 'player';
         const password = u.password ? String(u.password) : ""; // Default empty
 
         users.push({
@@ -336,13 +336,13 @@ app.get('/api/all-gamestates', (req, res) => {
 if (!fs.existsSync(USERS_FILE)) {
     const defaultUsers = [
         { id: '000000', name: 'System Admin', role: 'admin', password: '000000' },
-        { id: '600996', name: 'Pornsit', role: 'manager', password: '123456' },
-        { id: '600997', name: 'User 600997', role: 'manager', password: '123456' },
-        { id: '600998', name: 'User 600998', role: 'manager', password: '123456' },
-        { id: '600999', name: 'User 600999', role: 'manager', password: '123456' },
-        { id: '450880', name: 'Kked', role: 'manager', password: '123456' },
-        { id: '001146', name: 'Sabishiyo', role: 'manager', password: '123456' },
-        { id: '000568', name: 'kaejung', role: 'manager', password: '123456' }
+        { id: '600996', name: 'Pornsit', role: 'player', password: '123456' },
+        { id: '600997', name: 'User 600997', role: 'player', password: '123456' },
+        { id: '600998', name: 'User 600998', role: 'player', password: '123456' },
+        { id: '600999', name: 'User 600999', role: 'player', password: '123456' },
+        { id: '450880', name: 'Kked', role: 'player', password: '123456' },
+        { id: '001146', name: 'Sabishiyo', role: 'player', password: '123456' },
+        { id: '000568', name: 'kaejung', role: 'player', password: '123456' }
     ];
     writeJSON(USERS_FILE, defaultUsers);
     console.log('Initialized users.json');
