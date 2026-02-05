@@ -98,6 +98,7 @@
     <div id="admin-container" class="app-container hidden">
         <header>
             <h1>User <span class="accent">Management</span></h1>
+            <button id="btn-import-users" class="btn secondary" style="margin-right: 0.5rem;">Import CSV 📂</button>
             <button id="btn-export-users" class="btn primary" style="margin-right: 1rem;">Export User List</button>
             <button id="btn-back-game" class="btn secondary">Back to Game</button>
         </header>
@@ -161,6 +162,18 @@
 
     <div id="toast" class="toast hidden">Game Saved! 💾</div>
 
+    <!-- Admin Gallery Modal -->
+    <div id="gallery-modal" class="modal hidden">
+        <div class="modal-content large-modal">
+            <h3>System Gallery</h3>
+            <div id="gallery-grid" class="gallery-grid">
+                <!-- Images will load here -->
+            </div>
+            <button class="btn btn-secondary"
+                onclick="document.getElementById('gallery-modal').classList.add('hidden')">Close</button>
+        </div>
+    </div>
+
     <div id="setup-password-modal" class="modal hidden">
         <div class="modal-content">
             <h3>Set Your Password</h3>
@@ -169,6 +182,20 @@
                 inputmode="numeric">
             <div class="modal-actions">
                 <button id="btn-confirm-setup" class="btn primary full-width">Set Password & Login</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="import-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Import Users (CSV)</h3>
+            <p>Format: <code>ID,Name,Role,Password</code></p>
+            <p style="font-size: 0.8rem; color: #666;">Example: <code>100001,John Doe,viewer,123456</code></p>
+            <textarea id="import-csv-data" rows="10" placeholder="Paste your CSV data here..."
+                style="width: 100%; margin-top: 10px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: monospace;"></textarea>
+            <div class="modal-actions">
+                <button id="btn-cancel-import" class="btn secondary">Cancel</button>
+                <button id="btn-confirm-import" class="btn primary">Import Users</button>
             </div>
         </div>
     </div>
