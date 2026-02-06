@@ -755,3 +755,48 @@ input[type="file"] {
 canvas {
     pointer-events: none !important;
 }
+
+/* --- Gallery Modal --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.gallery-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px;
+    text-align: center;
+    background: #f9f9f9;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item p {
+    font-size: 0.8rem;
+    margin: 5px 0 0;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.large-modal {
+    max-width: 800px !important;
+    width: 90%;
+}
