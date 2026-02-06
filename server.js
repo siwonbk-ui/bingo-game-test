@@ -289,6 +289,7 @@ app.post('/api/users/bulk', (req, res) => {
 });
 
 // Delete User
+// Delete User
 app.delete('/api/users/:id', (req, res) => {
     const { id } = req.params;
     let users = readJSON(USERS_FILE);
@@ -297,6 +298,33 @@ app.delete('/api/users/:id', (req, res) => {
 
     if (users.length < initialLength) {
         writeJSON(USERS_FILE, users);
+
+        // --- Cleanup User Data ---
+        try {
+            // 1. Delete Game State
+            const gameStates = readJSON(GAMESTATES_FILE, {});
+            if (gameStates[id]) {
+                delete gameStates[id];
+                writeJSON(GAMESTATES_FILE, gameStates);
+                console.log(`Deleted game state for user ${id}`);
+            }
+
+            // 2. Delete Uploaded Images
+            if (fs.existsSync(UPLOAD_DIR)) {
+                const files = fs.readdirSync(UPLOAD_DIR);
+                files.forEach(file => {
+                    if (file.startsWith(`${id}_`)) {
+                        fs.unlinkSync(path.join(UPLOAD_DIR, file));
+                        console.log(`Deleted file: ${file}`);
+                    }
+                });
+            }
+        } catch (e) {
+            console.error("Error cleaning up user data:", e);
+            // Non-critical error, user is deleted anyway
+        }
+        // --- End Cleanup ---
+
         res.json({ success: true });
     } else {
         res.status(404).json({ success: false, message: 'User not found' });
