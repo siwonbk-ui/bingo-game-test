@@ -390,83 +390,110 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Gallery Logic ---
+    let allGalleryFiles = []; // Store for client-side filtering
+
     function loadGallery() {
+        const grid = document.getElementById('gallery-grid');
+        const searchInput = document.getElementById('gallery-search-input');
+
+        // Reset
+        grid.innerHTML = '<p style="text-align:center;">Loading...</p>';
+        if (searchInput) {
+            searchInput.value = '';
+            searchInput.oninput = () => renderGallery(searchInput.value.trim());
+        }
+
         fetch('/api/admin/uploads')
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    const grid = document.getElementById('gallery-grid');
-                    grid.innerHTML = '';
-
-                    if (data.files.length === 0) {
-                        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #555;">No images found.</p>';
-                    } else {
-                        // Group by User
-                        const grouped = {};
-                        data.files.forEach(file => {
-                            if (!grouped[file.userId]) {
-                                grouped[file.userId] = {
-                                    name: file.userName,
-                                    images: []
-                                };
-                            }
-                            grouped[file.userId].images.push(file);
-                        });
-
-                        // Sort users by latest upload (optional, but nice) or just ID/Name
-                        // Let's iterate object keys
-                        Object.keys(grouped).forEach(userId => {
-                            const userGroup = grouped[userId];
-
-                            // Create Section
-                            const section = document.createElement('div');
-                            section.className = 'gallery-section';
-                            section.style.gridColumn = "1 / -1"; // Full width
-                            section.style.marginBottom = "2rem";
-                            section.style.borderBottom = "1px solid #ddd";
-                            section.style.paddingBottom = "1rem";
-
-                            // Header
-                            const header = document.createElement('h4');
-                            header.textContent = `${userGroup.name} (ID: ${userId})`;
-                            header.style.marginBottom = "1rem";
-                            header.style.color = "#333";
-                            header.style.borderLeft = "4px solid var(--primary-color)";
-                            header.style.paddingLeft = "10px";
-                            section.appendChild(header);
-
-                            // Image Container (Flex or Grid)
-                            const imgContainer = document.createElement('div');
-                            imgContainer.style.display = "grid";
-                            // Responsive grid for images within the section
-                            imgContainer.style.gridTemplateColumns = "repeat(auto-fill, minmax(100px, 1fr))";
-                            imgContainer.style.gap = "10px";
-
-                            userGroup.images.forEach(file => {
-                                const item = document.createElement('div');
-                                item.className = 'gallery-item';
-                                item.style.boxShadow = "none"; // Slightly flatter inside list
-                                item.style.border = "1px solid #eee";
-
-                                item.innerHTML = `
-                                    <a href="${file.url}" target="_blank">
-                                        <img src="${file.url}" alt="${file.filename}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 4px;">
-                                    </a>
-                                    <!-- Optional: Delete button per image could go here -->
-                                `;
-                                imgContainer.appendChild(item);
-                            });
-
-                            section.appendChild(imgContainer);
-                            grid.appendChild(section);
-                        });
-                    }
+                    allGalleryFiles = data.files;
+                    renderGallery(); // Initial render all
                     document.getElementById('gallery-modal').classList.remove('hidden');
                 } else {
                     alert('Failed to load gallery: ' + data.message);
                 }
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                grid.innerHTML = '<p style="text-align:center; color:red;">Error loading gallery.</p>';
+            });
+    }
+
+    function renderGallery(filterText = '') {
+        const grid = document.getElementById('gallery-grid');
+        grid.innerHTML = '';
+
+        let filteredFiles = allGalleryFiles;
+
+        if (filterText) {
+            const lowerFilter = filterText.toLowerCase();
+            filteredFiles = allGalleryFiles.filter(file =>
+                file.userId.toString().includes(lowerFilter) ||
+                (file.userName && file.userName.toLowerCase().includes(lowerFilter))
+            );
+        }
+
+        if (filteredFiles.length === 0) {
+            grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #555;">No images found.</p>';
+            return;
+        }
+
+        // Group by User
+        const grouped = {};
+        filteredFiles.forEach(file => {
+            if (!grouped[file.userId]) {
+                grouped[file.userId] = {
+                    name: file.userName,
+                    images: []
+                };
+            }
+            grouped[file.userId].images.push(file);
+        });
+
+        Object.keys(grouped).forEach(userId => {
+            const userGroup = grouped[userId];
+
+            // Create Section
+            const section = document.createElement('div');
+            section.className = 'gallery-section';
+            section.style.gridColumn = "1 / -1";
+            section.style.marginBottom = "2rem";
+            section.style.borderBottom = "1px solid #ddd";
+            section.style.paddingBottom = "1rem";
+
+            // Header
+            const header = document.createElement('h4');
+            header.textContent = `${userGroup.name} (ID: ${userId})`;
+            header.style.marginBottom = "1rem";
+            header.style.color = "#333";
+            header.style.borderLeft = "4px solid var(--primary-color)";
+            header.style.paddingLeft = "10px";
+            section.appendChild(header);
+
+            // Image Container
+            const imgContainer = document.createElement('div');
+            imgContainer.style.display = "grid";
+            imgContainer.style.gridTemplateColumns = "repeat(auto-fill, minmax(100px, 1fr))";
+            imgContainer.style.gap = "10px";
+
+            userGroup.images.forEach(file => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.style.boxShadow = "none";
+                item.style.border = "1px solid #eee";
+
+                item.innerHTML = `
+                        <a href="${file.url}" target="_blank">
+                            <img src="${file.url}" alt="${file.filename}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 4px;">
+                        </a>
+                    `;
+                imgContainer.appendChild(item);
+            });
+
+            section.appendChild(imgContainer);
+            grid.appendChild(section);
+        });
     }
 
     // --- Export User List (Credentials) ---
