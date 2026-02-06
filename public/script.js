@@ -477,13 +477,36 @@ document.addEventListener('DOMContentLoaded', () => {
             imgContainer.style.gridTemplateColumns = "repeat(auto-fill, minmax(100px, 1fr))";
             imgContainer.style.gap = "10px";
 
+            // Sort Images by Index (Ascending)
+            userGroup.images.sort((a, b) => {
+                const getIndex = (f) => {
+                    const parts = f.filename.split('_');
+                    return parts.length >= 2 ? parseInt(parts[1]) : 0;
+                };
+                return getIndex(a) - getIndex(b);
+            });
+
             userGroup.images.forEach(file => {
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
                 item.style.boxShadow = "none";
                 item.style.border = "1px solid #eee";
+                item.style.textAlign = "center";
+
+                // Calculate Label (Row-Col)
+                let label = "";
+                const parts = file.filename.split('_'); // Format: USERID_INDEX.ext
+                if (parts.length >= 2) {
+                    const idx = parseInt(parts[1]);
+                    if (!isNaN(idx)) {
+                        const row = Math.floor(idx / 9) + 1;
+                        const col = (idx % 9) + 1;
+                        label = `<strong>${row}-${col}</strong>`;
+                    }
+                }
 
                 item.innerHTML = `
+                        <div style="font-size: 0.8rem; margin-bottom: 4px; color: #555;">${label}</div>
                         <a href="${file.url}" target="_blank">
                             <img src="${file.url}" alt="${file.filename}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 4px;">
                         </a>
