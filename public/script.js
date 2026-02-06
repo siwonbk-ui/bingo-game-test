@@ -42,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const TOTAL_CELLS = 81;
     const GRID_SIZE = 9;
+    // Static Board Definition (Must match startNewGame)
+    const STATIC_NUMBERS = [17, 2, 1, 2, 7, 13, 16, 3, 17, 7, 18, 16, 20, 11, 16, 13, 12, 12, 5, 6, 7, 5, 15, 20, 11, 1, 9, 10, 16, 1, 14, 19, 5, 17, 4, 10, 3, 2, 6, 9, "FREE", 18, 7, 5, 14, 20, 2, 12, 20, 19, 4, 10, 1, 14, 11, 19, 17, 15, 12, 4, 8, 18, 9, 10, 19, 13, 14, 8, 8, 11, 6, 9, 8, 15, 3, 15, 4, 13, 6, 18, 3];
+
     let isGameOver = false;
     let currentUploadedImage = null;
     let currentUser = null; // { id, name, role }
@@ -493,15 +496,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 item.style.border = "1px solid #eee";
                 item.style.textAlign = "center";
 
-                // Calculate Label (Row-Col)
+                // Calculate Label (Value-Col)
                 let label = "";
                 const parts = file.filename.split('_'); // Format: USERID_INDEX.ext
                 if (parts.length >= 2) {
                     const idx = parseInt(parts[1]);
                     if (!isNaN(idx)) {
-                        const row = Math.floor(idx / 9) + 1;
+                        // const row = Math.floor(idx / 9) + 1;
                         const col = (idx % 9) + 1;
-                        label = `<strong>${row}-${col}</strong>`;
+                        const value = STATIC_NUMBERS[idx];
+                        label = `<strong>${value}-${col}</strong>`;
                     }
                 }
 
@@ -755,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isGameOver = state.isGameOver || false;
 
                 // Static Board Definition (Must match startNewGame)
-                const STATIC_NUMBERS = [17, 2, 1, 2, 7, 13, 16, 3, 17, 7, 18, 16, 20, 11, 16, 13, 12, 12, 5, 6, 7, 5, 15, 20, 11, 1, 9, 10, 16, 1, 14, 19, 5, 17, 4, 10, 3, 2, 6, 9, "FREE", 18, 7, 5, 14, 20, 2, 12, 20, 19, 4, 10, 1, 14, 11, 19, 17, 15, 12, 4, 8, 18, 9, 10, 19, 13, 14, 8, 8, 11, 6, 9, 8, 15, 3, 15, 4, 13, 6, 18, 3];
+                // const STATIC_NUMBERS = [17, 2 ...]; // Now Global
 
                 // Check if the loaded board matches our new static board
                 const currentBoardStr = JSON.stringify(numbers);
