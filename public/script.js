@@ -471,16 +471,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const index = indices[i];
 
+                // Add specific label: e.g. "1-1", "1-2"
+                const label = document.createElement('div');
+                label.className = 'slot-label';
+                label.textContent = `${num}-${i + 1}`;
+
                 if (index !== undefined && cellImages[index]) {
                     // Image Exists
                     const img = document.createElement('img');
                     img.src = cellImages[index];
                     img.onclick = () => window.open(cellImages[index], '_blank');
                     slot.appendChild(img);
+                    slot.appendChild(label); // Add label on top of image
                 } else if (index !== undefined) {
                     // Valid slot on board, but no image
                     slot.classList.add('empty');
                     slot.textContent = "No Pic";
+                    slot.appendChild(label);
                 } else {
                     // No slot on board
                     slot.classList.add('empty');
