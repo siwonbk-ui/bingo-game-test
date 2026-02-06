@@ -164,12 +164,16 @@
     <!-- Admin Gallery Modal -->
     <div id="gallery-modal" class="modal hidden">
         <div class="modal-content large-modal">
-            <h3>System Gallery</h3>
-            <div id="gallery-grid" class="gallery-grid">
-                <!-- Images will load here -->
+            <h3>Inspection Gallery</h3>
+            <div class="search-bar-container">
+                <input type="text" id="gallery-search-id" placeholder="Enter User ID (6 digits)" maxlength="6">
+                <button id="btn-gallery-search" class="btn primary">Search</button>
             </div>
-            <button class="btn btn-secondary"
-                onclick="document.getElementById('gallery-modal').classList.add('hidden')">Close</button>
+            <div id="gallery-inspection-container" class="gallery-inspection-container">
+                <!-- Horizontal list of 20 columns generated here -->
+                <p class="placeholder-text">Enter a User ID to inspect images.</p>
+            </div>
+            <button class="btn btn-secondary" onclick="closeGalleryModal()">Close</button>
         </div>
     </div>
 

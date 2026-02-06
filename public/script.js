@@ -390,83 +390,110 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Gallery Logic ---
+    window.closeGalleryModal = function () {
+        document.getElementById('gallery-modal').classList.add('hidden');
+    };
+
     function loadGallery() {
-        fetch('/api/admin/uploads')
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    const grid = document.getElementById('gallery-grid');
-                    grid.innerHTML = '';
+        // Reset View
+        document.getElementById('gallery-inspection-container').innerHTML = '<p class="placeholder-text">Enter a User ID to inspect images.</p>';
+        document.getElementById('gallery-search-id').value = '';
+        document.getElementById('gallery-modal').classList.remove('hidden');
+    }
 
-                    if (data.files.length === 0) {
-                        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #555;">No images found.</p>';
-                    } else {
-                        // Group by User
-                        const grouped = {};
-                        data.files.forEach(file => {
-                            if (!grouped[file.userId]) {
-                                grouped[file.userId] = {
-                                    name: file.userName,
-                                    images: []
-                                };
-                            }
-                            grouped[file.userId].images.push(file);
-                        });
+    const btnGallerySearch = document.getElementById('btn-gallery-search');
+    if (btnGallerySearch) {
+        btnGallerySearch.addEventListener('click', async () => {
+            const searchId = document.getElementById('gallery-search-id').value.trim();
+            if (!/^\d{6}$/.test(searchId)) {
+                alert("Please enter a valid 6-digit User ID.");
+                return;
+            }
 
-                        // Sort users by latest upload (optional, but nice) or just ID/Name
-                        // Let's iterate object keys
-                        Object.keys(grouped).forEach(userId => {
-                            const userGroup = grouped[userId];
+            const container = document.getElementById('gallery-inspection-container');
+            container.innerHTML = '<p class="placeholder-text">Loading...</p>';
 
-                            // Create Section
-                            const section = document.createElement('div');
-                            section.className = 'gallery-section';
-                            section.style.gridColumn = "1 / -1"; // Full width
-                            section.style.marginBottom = "2rem";
-                            section.style.borderBottom = "1px solid #ddd";
-                            section.style.paddingBottom = "1rem";
+            try {
+                // Fetch Game State for User
+                const res = await fetch(`/api/game/${searchId}`);
+                const data = await res.json();
 
-                            // Header
-                            const header = document.createElement('h4');
-                            header.textContent = `${userGroup.name} (ID: ${userId})`;
-                            header.style.marginBottom = "1rem";
-                            header.style.color = "#333";
-                            header.style.borderLeft = "4px solid var(--primary-color)";
-                            header.style.paddingLeft = "10px";
-                            section.appendChild(header);
+                // Fetch User Info for display name (optional but nice)
+                // We'll just show ID for now or fetch list if needed.
 
-                            // Image Container (Flex or Grid)
-                            const imgContainer = document.createElement('div');
-                            imgContainer.style.display = "grid";
-                            // Responsive grid for images within the section
-                            imgContainer.style.gridTemplateColumns = "repeat(auto-fill, minmax(100px, 1fr))";
-                            imgContainer.style.gap = "10px";
-
-                            userGroup.images.forEach(file => {
-                                const item = document.createElement('div');
-                                item.className = 'gallery-item';
-                                item.style.boxShadow = "none"; // Slightly flatter inside list
-                                item.style.border = "1px solid #eee";
-
-                                item.innerHTML = `
-                                    <a href="${file.url}" target="_blank">
-                                        <img src="${file.url}" alt="${file.filename}" style="width: 100%; height: 100px; object-fit: cover; border-radius: 4px;">
-                                    </a>
-                                    <!-- Optional: Delete button per image could go here -->
-                                `;
-                                imgContainer.appendChild(item);
-                            });
-
-                            section.appendChild(imgContainer);
-                            grid.appendChild(section);
-                        });
-                    }
-                    document.getElementById('gallery-modal').classList.remove('hidden');
+                if (data.success && data.state) {
+                    renderInspectionGrid(data.state, searchId);
                 } else {
-                    alert('Failed to load gallery: ' + data.message);
+                    container.innerHTML = `<p class="placeholder-text">No game data found for User ID ${searchId}</p>`;
                 }
-            })
-            .catch(err => console.error(err));
+            } catch (e) {
+                console.error("Search failed", e);
+                container.innerHTML = '<p class="placeholder-text error">Error fetching data.</p>';
+            }
+        });
+    }
+
+    function renderInspectionGrid(gameState, userId) {
+        const container = document.getElementById('gallery-inspection-container');
+        container.innerHTML = ''; // Clear
+
+        const cellImages = gameState.cellImages || {};
+
+        // Static Numbers Definition (Same as in loadState)
+        const STATIC_NUMBERS = [17, 2, 1, 2, 7, 13, 16, 3, 17, 7, 18, 16, 20, 11, 16, 13, 12, 12, 5, 6, 7, 5, 15, 20, 11, 1, 9, 10, 16, 1, 14, 19, 5, 17, 4, 10, 3, 2, 6, 9, "FREE", 18, 7, 5, 14, 20, 2, 12, 20, 19, 4, 10, 1, 14, 11, 19, 17, 15, 12, 4, 8, 18, 9, 10, 19, 13, 14, 8, 8, 11, 6, 9, 8, 15, 3, 15, 4, 13, 6, 18, 3];
+
+        // We want to display numbers 1 to 20
+        for (let num = 1; num <= 20; num++) {
+            // Find all indices for this specific number
+            const indices = [];
+            STATIC_NUMBERS.forEach((val, idx) => {
+                if (val === num) indices.push(idx);
+            });
+
+            // Create Column
+            const col = document.createElement('div');
+            col.className = 'inspection-column';
+
+            // Header
+            const header = document.createElement('div');
+            header.className = 'inspection-header';
+            header.textContent = num;
+            col.appendChild(header);
+
+            // Render Slots (Expect up to 4, but handle whatever exists)
+            // User requested 4 slots vertically.
+            // If indices < 4 (unlikely for this board), we fill placeholders.
+            // If > 4, we show all? Layout says 20x4.
+            // Let's iterate 4 times for standard look.
+
+            for (let i = 0; i < 4; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'inspection-slot';
+
+                const index = indices[i]; // The board cell index
+
+                if (index !== undefined && cellImages[index]) {
+                    // Image Exists
+                    const img = document.createElement('img');
+                    img.src = cellImages[index];
+                    img.onclick = () => window.open(cellImages[index], '_blank');
+                    slot.appendChild(img);
+                } else if (index !== undefined) {
+                    // Valid slot on board, but no image
+                    slot.classList.add('empty');
+                    slot.textContent = "No Image";
+                } else {
+                    // No slot on board (if number appears < 4 times)
+                    slot.classList.add('empty');
+                    slot.style.background = "#ddd"; // Grey out
+                    slot.textContent = "-";
+                }
+
+                col.appendChild(slot);
+            }
+
+            container.appendChild(col);
+        }
     }
 
     // --- Export User List (Credentials) ---
