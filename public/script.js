@@ -439,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const cellImages = gameState.cellImages || {};
 
-        // Static Numbers Definition (Same as in loadState)
+        // Static Numbers Definition
         const STATIC_NUMBERS = [17, 2, 1, 2, 7, 13, 16, 3, 17, 7, 18, 16, 20, 11, 16, 13, 12, 12, 5, 6, 7, 5, 15, 20, 11, 1, 9, 10, 16, 1, 14, 19, 5, 17, 4, 10, 3, 2, 6, 9, "FREE", 18, 7, 5, 14, 20, 2, 12, 20, 19, 4, 10, 1, 14, 11, 19, 17, 15, 12, 4, 8, 18, 9, 10, 19, 13, 14, 8, 8, 11, 6, 9, 8, 15, 3, 15, 4, 13, 6, 18, 3];
 
         // We want to display numbers 1 to 20
@@ -450,27 +450,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (val === num) indices.push(idx);
             });
 
-            // Create Column
-            const col = document.createElement('div');
-            col.className = 'inspection-column';
+            // Create ROW
+            const row = document.createElement('div');
+            row.className = 'inspection-row';
 
-            // Header
+            // Header (The Number on the left)
             const header = document.createElement('div');
             header.className = 'inspection-header';
             header.textContent = num;
-            col.appendChild(header);
+            row.appendChild(header);
 
-            // Render Slots (Expect up to 4, but handle whatever exists)
-            // User requested 4 slots vertically.
-            // If indices < 4 (unlikely for this board), we fill placeholders.
-            // If > 4, we show all? Layout says 20x4.
-            // Let's iterate 4 times for standard look.
+            // Container for 4 Images
+            const imagesGroup = document.createElement('div');
+            imagesGroup.className = 'inspection-images-group';
 
+            // User requested 4 slots horizontally in the row
             for (let i = 0; i < 4; i++) {
                 const slot = document.createElement('div');
                 slot.className = 'inspection-slot';
 
-                const index = indices[i]; // The board cell index
+                const index = indices[i];
 
                 if (index !== undefined && cellImages[index]) {
                     // Image Exists
@@ -481,18 +480,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else if (index !== undefined) {
                     // Valid slot on board, but no image
                     slot.classList.add('empty');
-                    slot.textContent = "No Image";
+                    slot.textContent = "No Pic";
                 } else {
-                    // No slot on board (if number appears < 4 times)
+                    // No slot on board
                     slot.classList.add('empty');
-                    slot.style.background = "#ddd"; // Grey out
+                    slot.style.background = "#eee";
                     slot.textContent = "-";
                 }
 
-                col.appendChild(slot);
+                imagesGroup.appendChild(slot);
             }
+            row.appendChild(imagesGroup);
 
-            container.appendChild(col);
+            container.appendChild(row);
         }
     }
 
