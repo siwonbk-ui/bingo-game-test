@@ -480,13 +480,30 @@ document.addEventListener('DOMContentLoaded', () => {
             imgContainer.style.gridTemplateColumns = "repeat(auto-fill, minmax(100px, 1fr))";
             imgContainer.style.gap = "10px";
 
-            // Sort Images by Index (Ascending)
+            // Sort Images by Bingo Value (Ascending), then by Index
             userGroup.images.sort((a, b) => {
-                const getIndex = (f) => {
+                const getInfo = (f) => {
                     const parts = f.filename.split('_');
-                    return parts.length >= 2 ? parseInt(parts[1]) : 0;
+                    const index = parts.length >= 2 ? parseInt(parts[1]) : 0;
+                    const value = STATIC_NUMBERS[index] !== undefined ? STATIC_NUMBERS[index] : 999;
+                    return { index, value };
                 };
-                return getIndex(a) - getIndex(b);
+
+                const infoA = getInfo(a);
+                const infoB = getInfo(b);
+
+                // Primary Sort: Value (Ascending)
+                if (infoA.value !== infoB.value) {
+                    // Check for "FREE" string case (treat as 0 or middle?)
+                    // If both are numbers, simple sub. If strings mixed, handle.
+                    // STATIC_NUMBERS has numbers and "FREE".
+                    if (typeof infoA.value === 'string') return -1; // FREE first? Or last? Let's say First (smallest)
+                    if (typeof infoB.value === 'string') return 1;
+                    return infoA.value - infoB.value;
+                }
+
+                // Secondary Sort: Index (Ascending) - to keep stable order for same numbers
+                return infoA.index - infoB.index;
             });
 
             userGroup.images.forEach(file => {
