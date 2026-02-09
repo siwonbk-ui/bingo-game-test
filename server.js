@@ -367,18 +367,37 @@ app.get('/api/all-gamestates', (req, res) => {
 });
 
 // Initialize Default Data if missing
+// Initialize Default Data if missing OR Update missing defaults
+const defaultUsers = [
+    { id: '000000', name: 'System Admin', role: 'admin', password: '000000' },
+    { id: '600996', name: 'Pornsit Thipsongkroh', role: 'manager', password: '123456' },
+    { id: '000514', name: 'Sunee Charoenpul', role: 'manager', password: '' },
+    { id: '000568', name: 'Tassanee Likhitlaksanakul', role: 'manager', password: '' },
+    { id: '001146', name: 'Nontakan Thanopajai', role: 'manager', password: '' },
+    { id: '450880', name: 'Kedsara Kosolarekhomwitaya', role: 'manager', password: '' },
+    { id: '001', name: 'Test Admin', role: 'admin', password: '123456' }
+];
+
 if (!fs.existsSync(USERS_FILE)) {
-    const defaultUsers = [
-        { id: '000000', name: 'System Admin', role: 'admin', password: '000000' },
-        { id: '600996', name: 'Pornsit Thipsongkroh', role: 'manager', password: '123456' },
-        { id: '000514', name: 'Sunee Charoenpul', role: 'manager', password: '' },
-        { id: '000568', name: 'Tassanee Likhitlaksanakul', role: 'manager', password: '' },
-        { id: '001146', name: 'Nontakan Thanopajai', role: 'manager', password: '' },
-        { id: '450880', name: 'Kedsara Kosolarekhomwitaya', role: 'manager', password: '' },
-        { id: '001', name: 'Test Admin', role: 'admin', password: '123456' }
-    ];
     writeJSON(USERS_FILE, defaultUsers);
     console.log('Initialized users.json');
+} else {
+    // Ensure critical users exist even if file exists (Merge)
+    const currentUsers = readJSON(USERS_FILE);
+    let updated = false;
+
+    defaultUsers.forEach(defUser => {
+        if (!currentUsers.some(u => u.id === defUser.id)) {
+            console.log(`Adding missing default user: ${defUser.id}`);
+            currentUsers.push(defUser);
+            updated = true;
+        }
+    });
+
+    if (updated) {
+        writeJSON(USERS_FILE, currentUsers);
+        console.log('Updated users.json with missing defaults');
+    }
 }
 
 app.listen(PORT, () => {
