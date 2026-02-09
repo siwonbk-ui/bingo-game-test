@@ -679,7 +679,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = newUserNameInput.value.trim();
         const role = newUserRoleSelect.value;
 
-        if (!/^\d{6}$/.test(id)) return alert('ID must be 6 digits');
+        if (!/^\d{3}$/.test(id)) return alert('ID must be 3 digits');
         // Removed Password check to allow empty (setup later)
         if (!name) return alert('Please enter a name');
 
