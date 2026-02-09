@@ -370,11 +370,6 @@ app.get('/api/all-gamestates', (req, res) => {
 // Initialize Default Data if missing OR Update missing defaults
 const defaultUsers = [
     { id: '000000', name: 'System Admin', role: 'admin', password: '000000' },
-    { id: '600996', name: 'Pornsit Thipsongkroh', role: 'manager', password: '123456' },
-    { id: '000514', name: 'Sunee Charoenpul', role: 'manager', password: '' },
-    { id: '000568', name: 'Tassanee Likhitlaksanakul', role: 'manager', password: '' },
-    { id: '001146', name: 'Nontakan Thanopajai', role: 'manager', password: '' },
-    { id: '450880', name: 'Kedsara Kosolarekhomwitaya', role: 'manager', password: '' },
     { id: '001', name: 'Test Admin', role: 'admin', password: '123456' }
 ];
 
