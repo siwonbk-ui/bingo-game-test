@@ -350,7 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (isWin(d2)) lineCount++;
 
                     // Determine Title based on Line Count
-                    if (imagesCount === TOTAL_CELLS) {
+                    // Fix: Allow 80 images (TOTAL_CELLS - 1) because FREE cell is not uploaded
+                    if (imagesCount >= TOTAL_CELLS - 1) {
                         winTitle = "SUSTAIN CHAMPION (Full)";
                     } else if (lineCount >= 6) {
                         winTitle = `Advanced Sustain (${lineCount} Lines)`;
@@ -1153,7 +1154,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (titleText === "SUSTAIN CHAMPION!!!") {
             // Special gradient for Champion
             winTitle.style.background = "linear-gradient(to right, #ff00cc, #333399)";
+            winTitle.style.backgroundClip = "text";
             winTitle.style.webkitBackgroundClip = "text";
+            winTitle.style.webkitTextFillColor = "transparent";
+            winTitle.style.color = "transparent";
         } else {
             // Default (Amber/Gold gradient from CSS handles this if we remove inline style, but let's reset to allow CSS class to work or set dynamic)
             // Actually CSS .bingo-text has a default gradient. 
