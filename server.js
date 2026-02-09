@@ -165,24 +165,30 @@ app.delete('/api/upload', (req, res) => {
 // Login
 app.post('/api/login', (req, res) => {
     const { id, password } = req.body;
-    const users = readJSON(USERS_FILE);
+    console.log(`[LOGIN ATTEMPT] ID: "${id}", Pass: "${password}"`);
 
-    // Find user by ID first
+    const users = readJSON(USERS_FILE);
     const user = users.find(u => u.id === id);
 
     if (!user) {
+        console.log(`[LOGIN FAILED] User not found: "${id}"`);
         return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 
+    console.log(`[LOGIN FOUND] User: ${JSON.stringify(user)}`);
+
     // Check if First Time Setup is needed (Empty Password)
     if (user.password === "") {
+        console.log(`[LOGIN SETUP REQUIRED] for ${id}`);
         return res.json({ success: false, requireSetup: true, message: 'First time setup required' });
     }
 
     // Normal Login Check
     if (user.password === password) {
+        console.log(`[LOGIN SUCCESS] ${id}`);
         res.json({ success: true, user });
     } else {
+        console.log(`[LOGIN FAILED] Password mismatch. Expected "${user.password}", Got "${password}"`);
         res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 });
@@ -364,13 +370,11 @@ app.get('/api/all-gamestates', (req, res) => {
 if (!fs.existsSync(USERS_FILE)) {
     const defaultUsers = [
         { id: '000000', name: 'System Admin', role: 'admin', password: '000000' },
-        { id: '600996', name: 'Pornsit', role: 'player', password: '123456' },
-        { id: '600997', name: 'User 600997', role: 'player', password: '123456' },
-        { id: '600998', name: 'User 600998', role: 'player', password: '123456' },
-        { id: '600999', name: 'User 600999', role: 'player', password: '123456' },
-        { id: '450880', name: 'Kked', role: 'player', password: '123456' },
-        { id: '001146', name: 'Sabishiyo', role: 'player', password: '123456' },
-        { id: '000568', name: 'kaejung', role: 'player', password: '123456' },
+        { id: '600996', name: 'Pornsit Thipsongkroh', role: 'manager', password: '123456' },
+        { id: '000514', name: 'Sunee Charoenpul', role: 'manager', password: '' },
+        { id: '000568', name: 'Tassanee Likhitlaksanakul', role: 'manager', password: '' },
+        { id: '001146', name: 'Nontakan Thanopajai', role: 'manager', password: '' },
+        { id: '450880', name: 'Kedsara Kosolarekhomwitaya', role: 'manager', password: '' },
         { id: '001', name: 'Test Admin', role: 'admin', password: '123456' }
     ];
     writeJSON(USERS_FILE, defaultUsers);
