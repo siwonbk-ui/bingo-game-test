@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Game Elements ---
     const gridContainer = document.getElementById('grid-container');
-    const btnNewGame = document.getElementById('btn-new-game');
+
     const btnReset = document.getElementById('btn-reset');
     const btnSave = document.getElementById('btn-save');
     const winOverlay = document.getElementById('win-overlay');
@@ -815,11 +815,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    btnNewGame.addEventListener('click', () => {
-        if (confirm("Start a new game? This will clear your current progress.")) {
-            startNewGame(true);
-        }
-    });
+
 
     btnReset.addEventListener('click', async () => {
         if (confirm("Reset this board? This will DELETE ALL your uploaded photos and clear progress.")) {
