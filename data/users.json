@@ -10,5 +10,35 @@
     "name": "Test Admin",
     "role": "admin",
     "password": "123456"
+  },
+  {
+    "id": "002",
+    "name": "Sunee Charoenpul",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "003",
+    "name": "Tassanee Likhitlaksanakul",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "004",
+    "name": "Nontakan Thanopajai",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "005",
+    "name": "Kedsara Kosolarekhomwitaya",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "006",
+    "name": "Pornsit Thipsongkroh",
+    "role": "player",
+    "password": ""
   }
 ]
