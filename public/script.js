@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const TOTAL_CELLS = 81;
     const GRID_SIZE = 9;
     // Static Board Definition (Must match startNewGame)
-    const STATIC_NUMBERS = [17, 2, 1, 2, 7, 13, 16, 3, 17, 7, 18, 16, 20, 11, 16, 13, 12, 12, 5, 6, 7, 5, 15, 20, 11, 1, 9, 10, 16, 1, 14, 19, 5, 17, 4, 10, 3, 2, 6, 9, "FREE", 18, 7, 5, 14, 20, 2, 12, 20, 19, 4, 10, 1, 14, 11, 19, 17, 15, 12, 4, 8, 18, 9, 10, 19, 13, 14, 8, 8, 11, 6, 9, 8, 15, 3, 15, 4, 13, 6, 18, 3];
+    const STATIC_NUMBERS = [3, 2, 16, 7, 5, 13, 8, 10, 2, 6, 19, 12, 3, 5, 9, 16, 7, 18, 20, 14, 2, 8, 5, 10, 13, 3, 6, 17, 12, 7, 16, 9, 5, 2, 19, 8, 14, 10, 3, 6, "FREE", 7, 13, 5, 2, 16, 9, 12, 18, 20, 7, 10, 17, 8, 14, 3, 2, 6, 13, 5, 19, 9, 15, 7, 12, 16, 10, 8, 4, 2, 17, 13, 6, 18, 5, 15, 9, 1, 11, 19, 14];
 
     let isGameOver = false;
     let currentUploadedImage = null;
@@ -350,8 +350,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (isWin(d2)) lineCount++;
 
                     // Determine Title based on Line Count
-                    // Fix: Allow 80 images (TOTAL_CELLS - 1) because FREE cell is not uploaded
-                    if (imagesCount >= TOTAL_CELLS - 1) {
+                    // Full Board: 80 images (81 total - 1 free cell)
+                    if (imagesCount >= 80) {
                         winTitle = "SUSTAIN CHAMPION (Full)";
                     } else if (lineCount >= 6) {
                         winTitle = `Advanced Sustain (${lineCount} Lines)`;
@@ -921,7 +921,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (regenerateNumbers) {
             // Static Board Configuration (1-20 balanced, same for all users)
-            numbers = [17, 2, 1, 2, 7, 13, 16, 3, 17, 7, 18, 16, 20, 11, 16, 13, 12, 12, 5, 6, 7, 5, 15, 20, 11, 1, 9, 10, 16, 1, 14, 19, 5, 17, 4, 10, 3, 2, 6, 9, "FREE", 18, 7, 5, 14, 20, 2, 12, 20, 19, 4, 10, 1, 14, 11, 19, 17, 15, 12, 4, 8, 18, 9, 10, 19, 13, 14, 8, 8, 11, 6, 9, 8, 15, 3, 15, 4, 13, 6, 18, 3];
+            numbers = [3, 2, 16, 7, 5, 13, 8, 10, 2, 6, 19, 12, 3, 5, 9, 16, 7, 18, 20, 14, 2, 8, 5, 10, 13, 3, 6, 17, 12, 7, 16, 9, 5, 2, 19, 8, 14, 10, 3, 6, "FREE", 7, 13, 5, 2, 16, 9, 12, 18, 20, 7, 10, 17, 8, 14, 3, 2, 6, 13, 5, 19, 9, 15, 7, 12, 16, 10, 8, 4, 2, 17, 13, 6, 18, 5, 15, 9, 1, 11, 19, 14];
         }
 
         renderGrid();
