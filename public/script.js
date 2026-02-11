@@ -194,6 +194,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    // Check for 3-digit ID to show hint
+    userIdInput.addEventListener('input', async () => {
+        const id = userIdInput.value;
+        const hint = document.getElementById('login-hint');
+        if (!hint) return;
+
+        if (id.length === 3) {
+            try {
+                const res = await fetch('/api/check-setup-needed', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id })
+                });
+                const data = await res.json();
+                if (data.setupNeeded) {
+                    hint.classList.remove('hidden');
+                } else {
+                    hint.classList.add('hidden');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        } else {
+            hint.classList.add('hidden');
+        }
+    });
+
     async function handleLogin() {
         const inputId = userIdInput.value.trim();
         const inputPassword = userPasswordInput.value.trim();
