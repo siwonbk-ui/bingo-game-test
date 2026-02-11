@@ -107,7 +107,7 @@ body {
     left: 0;
     z-index: 10;
     background-color: var(--bg-nature);
-    background-image: url('assets/login_background.png');
+    background-image: url('assets/login_background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
