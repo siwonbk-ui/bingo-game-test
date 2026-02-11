@@ -821,9 +821,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    btnReset.addEventListener('click', () => {
-        if (confirm("Reset this board? This will clear all your images.")) {
-            resetBoard();
+    btnReset.addEventListener('click', async () => {
+        if (confirm("Reset this board? This will DELETE ALL your uploaded photos and clear progress.")) {
+            await resetBoard();
         }
     });
 
@@ -932,7 +932,24 @@ document.addEventListener('DOMContentLoaded', () => {
         checkWinCondition();
     }
 
-    function resetBoard() {
+    async function resetBoard() {
+        if (!currentUser) return;
+
+        // Delete all images from server
+        const indices = Object.keys(cellImages);
+        for (const index of indices) {
+            const imageUrl = cellImages[index];
+            try {
+                await fetch('/api/upload', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: currentUser.id, url: imageUrl })
+                });
+            } catch (e) {
+                console.error(`Failed to delete image at index ${index}`, e);
+            }
+        }
+
         isGameOver = false;
         cellImages = {};
 
@@ -946,6 +963,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         closeWinOverlay();
         saveState();
+        showToast('Board Reset & Images Deleted');
     }
 
     function renderGrid() {
