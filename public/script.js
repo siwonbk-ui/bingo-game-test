@@ -263,7 +263,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (role === 'admin') {
             btnAdminPanel.classList.remove('hidden');
             btnDownloadReport.classList.remove('hidden');
-            btnNewGame.classList.remove('hidden');
             btnReset.classList.remove('hidden');
 
             // Inject Gallery Button if not exists
@@ -280,7 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Non-admin users
             btnAdminPanel.classList.add('hidden');
             btnDownloadReport.classList.add('hidden');
-            btnNewGame.classList.add('hidden');
             btnReset.classList.add('hidden');
 
             const btn = document.getElementById('btn-view-gallery');
