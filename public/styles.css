@@ -946,4 +946,11 @@ canvas {
     font-weight: 700;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
     letter-spacing: 0.5px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px;
+    font-size: clamp(1rem, 4vw, 1.5rem) !important;
+    /* Responsive font size */
+    line-height: 1.4;
 }
