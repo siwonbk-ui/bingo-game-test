@@ -1,11 +1,5 @@
 [
   {
-    "id": "000000",
-    "name": "System Admin",
-    "role": "admin",
-    "password": "000000"
-  },
-  {
     "id": "001",
     "name": "Test Admin",
     "role": "admin",
