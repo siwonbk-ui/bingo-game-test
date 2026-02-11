@@ -162,6 +162,18 @@ app.delete('/api/upload', (req, res) => {
 });
 
 
+// Check if setup needed (for dynamic hint)
+app.post('/api/check-setup-needed', (req, res) => {
+    const { id } = req.body;
+    const users = readJSON(USERS_FILE);
+    const user = users.find(u => u.id === id);
+    if (user && user.password === "") {
+        res.json({ setupNeeded: true });
+    } else {
+        res.json({ setupNeeded: false });
+    }
+});
+
 // Login
 app.post('/api/login', (req, res) => {
     const { id, password } = req.body;
