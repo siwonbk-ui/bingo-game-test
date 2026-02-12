@@ -954,3 +954,28 @@ canvas {
     /* Responsive font size */
     line-height: 1.4;
 }
+
+/* Mobile Centering for Info Text & Reference List */
+@media (max-width: 768px) {
+    .info-text {
+        padding: 0 1rem;
+        text-align: center !important;
+    }
+
+    .legend-scale {
+        padding: 0 0.5rem;
+    }
+
+    .legend-scale h3 {
+        text-align: center !important;
+    }
+
+    .legend-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 100%;
+    }
+
+    .legend-item {
+        width: 100%;
+    }
+}
