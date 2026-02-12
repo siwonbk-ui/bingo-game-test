@@ -932,9 +932,9 @@ canvas {
 
 /* Reference List Styling - Added by Request */
 .legend-scale h3 {
-    color: white !important;
+    color: #000000 !important;
     text-align: center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
 }
 
 .legend-item span {
