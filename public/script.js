@@ -972,19 +972,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        isGameOver = false;
-        cellImages = {};
-
-        const cells = document.querySelectorAll('.bingo-cell');
-        cells.forEach(cell => {
-            const index = cell.dataset.index;
-            if (numbers[index] === "FREE") return;
-            cell.classList.remove('active', 'win-cell');
-            cell.style.backgroundImage = 'none';
-            cell.style.color = '';
-        });
-        closeWinOverlay();
-        saveState();
+        // Restart with fresh STATIC_NUMBERS
+        startNewGame(true);
         showToast('Board Reset & Images Deleted');
     }
 
