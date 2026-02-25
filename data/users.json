@@ -4,5 +4,923 @@
     "name": "Test Admin",
     "role": "admin",
     "password": "123456"
+  },
+  {
+    "id": "002",
+    "name": "002",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "003",
+    "name": "003",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "004",
+    "name": "004",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "005",
+    "name": "005",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "006",
+    "name": "006",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "007",
+    "name": "007",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "008",
+    "name": "008",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "009",
+    "name": "009",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "010",
+    "name": "010",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "011",
+    "name": "011",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "012",
+    "name": "012",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "013",
+    "name": "013",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "014",
+    "name": "014",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "015",
+    "name": "015",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "016",
+    "name": "016",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "017",
+    "name": "017",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "018",
+    "name": "018",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "019",
+    "name": "019",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "020",
+    "name": "020",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "021",
+    "name": "021",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "022",
+    "name": "022",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "023",
+    "name": "023",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "024",
+    "name": "024",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "025",
+    "name": "025",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "026",
+    "name": "026",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "027",
+    "name": "027",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "028",
+    "name": "028",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "029",
+    "name": "029",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "030",
+    "name": "030",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "031",
+    "name": "031",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "032",
+    "name": "032",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "033",
+    "name": "033",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "034",
+    "name": "034",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "035",
+    "name": "035",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "036",
+    "name": "036",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "037",
+    "name": "037",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "038",
+    "name": "038",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "039",
+    "name": "039",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "040",
+    "name": "040",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "041",
+    "name": "041",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "042",
+    "name": "042",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "043",
+    "name": "043",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "044",
+    "name": "044",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "045",
+    "name": "045",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "046",
+    "name": "046",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "047",
+    "name": "047",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "048",
+    "name": "048",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "049",
+    "name": "049",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "050",
+    "name": "050",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "051",
+    "name": "051",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "052",
+    "name": "052",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "053",
+    "name": "053",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "054",
+    "name": "054",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "055",
+    "name": "055",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "056",
+    "name": "056",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "057",
+    "name": "057",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "058",
+    "name": "058",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "059",
+    "name": "059",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "060",
+    "name": "060",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "061",
+    "name": "061",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "062",
+    "name": "062",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "063",
+    "name": "063",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "064",
+    "name": "064",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "065",
+    "name": "065",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "066",
+    "name": "066",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "067",
+    "name": "067",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "068",
+    "name": "068",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "069",
+    "name": "069",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "070",
+    "name": "070",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "071",
+    "name": "071",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "072",
+    "name": "072",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "073",
+    "name": "073",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "074",
+    "name": "074",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "075",
+    "name": "075",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "076",
+    "name": "076",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "077",
+    "name": "077",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "078",
+    "name": "078",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "079",
+    "name": "079",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "080",
+    "name": "080",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "081",
+    "name": "081",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "082",
+    "name": "082",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "083",
+    "name": "083",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "084",
+    "name": "084",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "085",
+    "name": "085",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "086",
+    "name": "086",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "087",
+    "name": "087",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "088",
+    "name": "088",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "089",
+    "name": "089",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "090",
+    "name": "090",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "091",
+    "name": "091",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "092",
+    "name": "092",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "093",
+    "name": "093",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "094",
+    "name": "094",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "095",
+    "name": "095",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "096",
+    "name": "096",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "097",
+    "name": "097",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "098",
+    "name": "098",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "099",
+    "name": "099",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "100",
+    "name": "100",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "101",
+    "name": "101",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "102",
+    "name": "102",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "103",
+    "name": "103",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "104",
+    "name": "104",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "105",
+    "name": "105",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "106",
+    "name": "106",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "107",
+    "name": "107",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "108",
+    "name": "108",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "109",
+    "name": "109",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "110",
+    "name": "110",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "111",
+    "name": "111",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "112",
+    "name": "112",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "113",
+    "name": "113",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "114",
+    "name": "114",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "115",
+    "name": "115",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "116",
+    "name": "116",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "117",
+    "name": "117",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "118",
+    "name": "118",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "119",
+    "name": "119",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "120",
+    "name": "120",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "121",
+    "name": "121",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "122",
+    "name": "122",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "123",
+    "name": "123",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "124",
+    "name": "124",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "125",
+    "name": "125",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "126",
+    "name": "126",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "127",
+    "name": "127",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "128",
+    "name": "128",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "129",
+    "name": "129",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "130",
+    "name": "130",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "131",
+    "name": "131",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "132",
+    "name": "132",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "133",
+    "name": "133",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "134",
+    "name": "134",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "135",
+    "name": "135",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "136",
+    "name": "136",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "137",
+    "name": "137",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "138",
+    "name": "138",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "139",
+    "name": "139",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "140",
+    "name": "140",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "141",
+    "name": "141",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "142",
+    "name": "142",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "143",
+    "name": "143",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "144",
+    "name": "144",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "145",
+    "name": "145",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "146",
+    "name": "146",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "147",
+    "name": "147",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "148",
+    "name": "148",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "149",
+    "name": "149",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "150",
+    "name": "150",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "151",
+    "name": "151",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "152",
+    "name": "152",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "153",
+    "name": "153",
+    "role": "player",
+    "password": ""
+  },
+  {
+    "id": "154",
+    "name": "154",
+    "role": "player",
+    "password": ""
   }
 ]
