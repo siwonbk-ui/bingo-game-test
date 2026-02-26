@@ -1045,24 +1045,41 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.onload = function (event) {
                 const img = new Image();
                 img.onload = function () {
-                    const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 300;
-                    const scaleSize = MAX_WIDTH / img.width;
-                    const newWidth = MAX_WIDTH;
-                    const newHeight = img.height * scaleSize;
+                    let finalDataUrl;
+                    // If file is already small (< 150KB), don't shrink it aggressively
+                    if (file.size <= 150 * 1024) {
+                        // Keep original quality if small enough (re-encoding might actually increase size,
+                        // but to ensure format consistency we can still draw to canvas at full size or just use original data URL)
+                        // To be safe and consistent, just use the original base64.
+                        finalDataUrl = event.target.result;
+                    } else {
+                        // If file is large, reduce size reasonably. 
+                        // Mobile photos are often 3000px+. 800px is a good balance for web visibility (~80-150KB at 0.8 quality).
+                        const MAX_WIDTH = 800;
+                        let newWidth = img.width;
+                        let newHeight = img.height;
 
-                    canvas.width = newWidth;
-                    canvas.height = newHeight;
+                        if (img.width > MAX_WIDTH) {
+                            newWidth = MAX_WIDTH;
+                            newHeight = img.height * (MAX_WIDTH / img.width);
+                        }
 
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, newWidth, newHeight);
+                        const canvas = document.createElement('canvas');
+                        canvas.width = newWidth;
+                        canvas.height = newHeight;
 
-                    currentUploadedImage = canvas.toDataURL('image/jpeg', 0.7);
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, newWidth, newHeight);
 
+                        // Compression target
+                        finalDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                    }
+
+                    currentUploadedImage = finalDataUrl;
                     imagePreview.style.backgroundImage = `url(${currentUploadedImage})`;
                     imagePreview.classList.remove('hidden');
                     btnConfirmUpload.disabled = false;
-                }
+                };
                 img.src = event.target.result;
             };
             reader.readAsDataURL(file);
